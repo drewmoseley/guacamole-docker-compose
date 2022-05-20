@@ -19,7 +19,7 @@ cd guacamole-docker-compose
 docker compose up -d
 ~~~
 
-Your guacamole server should now be available at `https://ip of your server:8443/`. The default username is `guacadmin` with password `guacadmin`.
+Your guacamole server should now be available at `https://ip of your server:9443/`. The default username is `guacadmin` with password `guacadmin`.
 
 ## Details
 To understand some details let's take a closer look at parts of the `docker-compose.yml` file:
@@ -120,7 +120,7 @@ The following part of docker-compose.yml will create an instance of nginx that m
    - ./nginx/ssl/self.cert:/etc/nginx/ssl/self.cert:ro
    - ./nginx/ssl/self-ssl.key:/etc/nginx/ssl/self-ssl.key:ro
    ports:
-   - 8443:443
+   - 9443:443
    links:
    - guacamole
    networks:
