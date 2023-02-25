@@ -102,7 +102,7 @@ services:
     image: guacamole/guacd
     networks:
       - guacnetwork_compose
-    restart: always
+    restart: unless-stopped
     volumes:
     - ${HOME}/local/docker-volumes/guacamole/drive:/drive:rw
     - ${HOME}/local/docker-volumes/guacamole/record:/record:rw
@@ -117,7 +117,7 @@ services:
     image: postgres:15.2-alpine
     networks:
       - guacnetwork_compose
-    restart: always
+    restart: unless-stopped
     volumes:
     - ${HOME}/local/docker-volumes/guacamole/init:/docker-entrypoint-initdb.d:z
     - ${HOME}/local/docker-volumes/guacamole/data:/var/lib/postgresql/data:Z
@@ -144,13 +144,13 @@ services:
 ##    - 8080:8080/tcp # Guacamole is on :8080/guacamole, not /.
 ## enable next line when using nginx
     - 8080/tcp
-    restart: always
+    restart: unless-stopped
 
 ########### optional ##############
   # nginx
   nginx:
    container_name: nginx_guacamole_compose
-   restart: always
+   restart: unless-stopped
    image: nginx:latest
    volumes:
 

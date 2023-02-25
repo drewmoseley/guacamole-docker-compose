@@ -49,7 +49,7 @@ services:
     image: guacamole/guacd
     networks:
       guacnetwork_compose:
-    restart: always
+    restart: unless-stopped
     volumes:
     - ./drive:/drive:rw
     - ./record:/record:rw
@@ -71,7 +71,7 @@ The following part of docker-compose.yml will create an instance of PostgreSQL u
     image: postgres
     networks:
       guacnetwork_compose:
-    restart: always
+    restart: unless-stopped
     volumes:
     - ./init:/docker-entrypoint-initdb.d:ro
     - ./data:/var/lib/postgresql/data:rw
@@ -101,7 +101,7 @@ The following part of docker-compose.yml will create an instance of guacamole by
       guacnetwork_compose:
     ports:
     - 8080/tcp
-    restart: always
+    restart: unless-stopped
 ...
 ~~~
 
@@ -113,7 +113,7 @@ The following part of docker-compose.yml will create an instance of nginx that m
   # nginx
   nginx:
    container_name: nginx_guacamole_compose
-   restart: always
+   restart: unless-stopped
    image: nginx
    volumes:
    - ./nginx/templates:/etc/nginx/templates:ro
